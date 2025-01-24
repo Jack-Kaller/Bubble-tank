@@ -9,38 +9,27 @@ public class A_GetAllUser : MonoBehaviour
 
     void Start()
     {
-        allUser= new List<User>();
-
-        for (int i = 0; i < 10; i++)
-        {   
-            User userTemps = new User();
-            userTemps.id = i;
-
-            allUser.Add(userTemps);
-        }
-
-        System.Threading.Thread.Sleep(1000);
-
-        allTeam = createTeam();
-
     }
 
+    void GetAllUser(List<User> users)
+    {
+        allUser = users;
+    }
 
-    void addUser(User user)
+    void AddUser(User user)
     {
         allUser.Add(user);
     }
 
-
-    public List<Team> createTeam()
+    public void CreateTeam()
     {
         int sizeUser = allUser.Count;
-        List<Team> listTeam = new List<Team>();
+        allTeam = new List<Team>();
 
         if (sizeUser < 4)
         {
             Debug.LogError("Il n'y a pas assez de personnes pour créer une équipe.");
-            return null;
+            return;
         }
 
         int numberOfTeams;
@@ -62,23 +51,20 @@ public class A_GetAllUser : MonoBehaviour
         else
         {
             Debug.LogError("Vous avez trop de personnes.");
-            return null;
+            return;
         }
 
         for (int i = 0; i < numberOfTeams; i++)
         {
-            listTeam.Add(new Team { User = new List<User>() });
+            allTeam.Add(new Team { User = new List<User>() });
         }
 
         for (int i = 0; i < sizeUser; i++)
         {
             int teamIndex = i % numberOfTeams;
-            listTeam[teamIndex].User.Add(allUser[i]);
+            allTeam[teamIndex].User.Add(allUser[i]);
         }
-
-        return listTeam;
     }
-
 
 
 }
