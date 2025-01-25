@@ -10,6 +10,9 @@ public class QuickScript_II2GamepadOrAction : MonoBehaviour
     public STRUCT_ReceivedIID m_lastReceived;
     public STRUCT_GamepadByteId2020Percent11 m_lastGamepad;
     public int m_lastActionReceived= 0;
+
+    public UnityEvent<int> OnServerAction;
+
     public void PushInIndexInteger(int index, int value) { 
         STRUCT_ReceivedIID received = new STRUCT_ReceivedIID();
         received.index = index;
@@ -23,6 +26,11 @@ public class QuickScript_II2GamepadOrAction : MonoBehaviour
         m_lastReceived = received;
         m_lastValueTypeTag = received.integer;
 
+        if(m_lastValueTypeTag <= 100)
+        {
+            OnServerAction.Invoke(m_lastValueTypeTag);
+        }
+
         int integer = received.integer;
         int twoFirstDigitsLeftToRight = integer / 100000000;
         m_lastValueTypeTag= twoFirstDigitsLeftToRight;
@@ -34,7 +42,7 @@ public class QuickScript_II2GamepadOrAction : MonoBehaviour
             m_lastGamepad = gamepad;
             m_onGamepadReceived.Invoke(
                 received.index
-                , new Vector3(gamepad.m_joystickLeftHorizontal, gamepad.m_joystickRightVertical)
+                , new Vector3(gamepad.m_joystickLeftHorizontal, gamepad.m_joystickLeftVertical)
                 , new Vector3(gamepad.m_joystickRightHorizontal, gamepad.m_joystickRightVertical)
                 );
         }
