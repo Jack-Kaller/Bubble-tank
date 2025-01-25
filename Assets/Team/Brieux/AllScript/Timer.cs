@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,24 +12,54 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private AllUserDoubleJoystick factory;
 
+    [SerializeField]
+    private TextMeshProUGUI textAllUserDead;
+
     public bool isGameStarted = false;
+
+    [SerializeField]
+    private List<GameObject> activeUsers;
+
+    public AllUserDoubleJoystick userDb;
+
+
 
     void Update()
     {
         if (isGameStarted)
         {
+            activeUsers = userDb.allUsersGameObject;
             m_Time += Time.deltaTime;
 
-            int seconde = (int) m_Time % 60;
-            int minute = (int) m_Time / 60;
+            System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(m_Time);
+            m_TextMeshProUGUI.text = timeSpan.ToString(@"mm\:ss");
 
-            string formatted = $"{seconde:D2}";
-
-            m_TextMeshProUGUI.text = $"{minute}:{formatted}";
-
-            if(minute >= 5)
+            if (timeSpan.TotalMinutes >= 5) 
             {
-                factory.PauseGame();
+                Debug.Log("Temps écoulé, réinitialisation du jeu.");
+                foreach (GameObject gameObject in activeUsers)
+                {
+                    if (!gameObject.activeInHierarchy)
+                    {
+                        Debug.Log($"{gameObject.name} est inactif et sera ignoré.");
+                    }
+                }
+                factory.ResetGame();
+            }
+
+
+            for (int i = activeUsers.Count - 1; i >= 0; i--) 
+            {
+                if (!activeUsers[i].activeInHierarchy)
+                {
+                    Debug.Log($"Utilisateur {activeUsers[i].name} est désactivé et sera retiré.");
+                    activeUsers.RemoveAt(i);
+
+                    PlayerTeamIdRelayMono PTIRM = activeUsers[i].GetComponentInChildren<PlayerTeamIdRelayMono>();
+                    int idOfUser = PTIRM.GetTeamId();
+
+                    textAllUserDead.text += $"user {idOfUser}\r\n" ;
+                }
             }
 
         }
