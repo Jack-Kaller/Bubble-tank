@@ -22,13 +22,18 @@ public class Timer : MonoBehaviour
 
     public AllUserDoubleJoystick userDb;
 
+    public bool isGood = true;
 
 
     void Update()
     {
         if (isGameStarted)
         {
-            activeUsers = userDb.allUsersGameObject;
+            if (isGood)
+            {
+                activeUsers = new List<GameObject>(userDb.allUsersGameObject);
+                isGood= false;
+            }
             m_Time += Time.deltaTime;
 
             System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(m_Time);

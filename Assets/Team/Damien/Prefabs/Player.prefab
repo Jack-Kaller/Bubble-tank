@@ -175,7 +175,7 @@ MonoBehaviour:
   moveForce: 0.1
   rotationSpeed: 200
   rb: {fileID: 3465555862736721757}
-  m_direction: {fileID: 0}
+  m_direction: {fileID: 3150752160249210239}
   leftJoystick: {x: 0, y: 0}
   rightJoystick: {x: 0, y: 0}
   mode: 1
