@@ -80,10 +80,11 @@ public class AllUserDoubleJoystick : MonoBehaviour
             List<Vector3> teamPositions = new List<Vector3>();
             GameObject[] spawner = GameObject.FindGameObjectsWithTag("Spawn");
 
+            
 
             foreach (var spawn in spawner)
             {
-                teamPositions.Add(spawn.transform.position + new Vector3(0,2,0));
+                teamPositions.Add(spawn.transform.position + new Vector3(0,1,0));
             }
 
             Color[] teamColors = {
