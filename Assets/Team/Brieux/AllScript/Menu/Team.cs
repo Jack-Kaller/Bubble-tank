@@ -6,6 +6,11 @@ using UnityEngine;
 public class Team
 {
     [SerializeField]
-    public List<User> User { get; set; }
+    public List<User> User;
 
+    public List<User> team
+    {
+        get { return User; }
+        set { User = value; }
+    }
 }

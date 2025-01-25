@@ -29,3 +29,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
 
     }
 }
+
+
+[System.Serializable]
+public class RelayDoubleGamepadEvent : UnityEvent<int, Vector2, Vector2> { }
