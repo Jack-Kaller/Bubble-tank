@@ -14,9 +14,17 @@ public class AllUserDoubleJoystick : MonoBehaviour
     public GameObject prefabUser;
     public TextMeshProUGUI textAllUserConnected;
     public Canvas canvasMenu;
+    public List<GameObject> allMap;
+    public List<GameObject> allUsersGameObject;
+
+    private GameObject map;
+    private int userMax = 20;
+
+
 
     public void SetOrAdd(int userId , Vector2 joystickLeft, Vector2 joystickRight)
     {
+        
         for (int i = 0; i < allUser.Count; i++)
         {
             if (allUser[i].id == userId)
@@ -27,6 +35,12 @@ public class AllUserDoubleJoystick : MonoBehaviour
                 return;
             }
         }
+
+        if (allUser.Count >= userMax)
+        {
+            return;
+        }
+
         UserIdToDoubleJoyStick newUser = new UserIdToDoubleJoyStick { id = userId, joystickLeft = joystickLeft, joystickRight = joystickRight };
         allUser.Add(newUser);
         onNewUser.Invoke(newUser);
@@ -37,22 +51,41 @@ public class AllUserDoubleJoystick : MonoBehaviour
         textAllUserConnected.text += $"user avec id : {userId}\r\n"; 
     }
 
+    public void PushIntegerAction(int userId, int action)
+    {
+        for (int i = 0; i < allUser.Count; i++)
+        {
+            if (allUser[i].id == userId)
+            {
+                PlayerGamepadRelayMono gamepadUser = allUsersGameObject[i].GetComponent<PlayerGamepadRelayMono>();
+                gamepadUser.PushInIntegerAction(userId, action);
+                return;
+            }
+        }
+    }
 
     public void LaunchGame()
     {
         if (CreateTeam())
         {
-            Vector3[] teamPositions = {
-                new Vector3(-50, 10, 0), 
-                new Vector3(20, 10, 0), 
-                new Vector3(-20, 10, 0),
-                new Vector3(0, -10, 0)  
-            };
+            map = Instantiate(allMap[allTeam.Count - 2]);
+
+
+            List<Vector3> teamPositions = new List<Vector3>();
+            GameObject[] spawner = GameObject.FindGameObjectsWithTag("Spawn");
+
+
+            foreach (var spawn in spawner)
+            {
+                teamPositions.Add(spawn.transform.position);
+            }
+
             Color[] teamColors = {
                 Color.red,
                 Color.blue,
                 Color.green,
-                Color.black
+                Color.HSVToRGB(255, 165 ,0),
+                Color.cyan
             };
 
             canvasMenu.enabled = false;
@@ -62,27 +95,29 @@ public class AllUserDoubleJoystick : MonoBehaviour
 
                 for (int i = 0; i < team.User.Count; i++)
                 {
-                    GameObject test = Instantiate(prefabUser);
-                    test.name = $"Utilisateur_{team.User[i].id}";
+                    GameObject gameobjectUser = Instantiate(prefabUser);
+                    gameobjectUser.name = $"Utilisateur_{team.User[i].id}";
 
-                    PlayerTeamIdRelayMono idOfPlayer = test.gameObject.GetComponent<PlayerTeamIdRelayMono>();
-                    PlayerColorRelayMono colorPlayer = test.GetComponent<PlayerColorRelayMono>();
-                    PlayerGamepadRelayMono gamepadPlayer = test.GetComponent<PlayerGamepadRelayMono>();
+                    PlayerTeamIdRelayMono idOfPlayer = gameobjectUser.gameObject.GetComponent<PlayerTeamIdRelayMono>();
+                    PlayerColorRelayMono colorPlayer = gameobjectUser.GetComponent<PlayerColorRelayMono>();
+                    PlayerGamepadRelayMono gamepadPlayer = gameobjectUser.GetComponent<PlayerGamepadRelayMono>();
 
                     idOfPlayer.SetTeamId(team.User[i].id);
                     colorPlayer.SetColor(teamColors[teamIndex]);
                     gamepadPlayer.PushInGamepadValue(team.User[i].id, Random.insideUnitCircle, Random.insideUnitCircle);
 
                     Vector3 offset = new Vector3(i * 1, 0, 0);
-                    test.transform.position = teamPositions[teamIndex] + offset;
+                    gameobjectUser.transform.position = teamPositions[teamIndex] + offset;
 
-                    Renderer renderer = test.GetComponent<Renderer>();
+                    Renderer renderer = gameobjectUser.GetComponent<Renderer>();
                     if (renderer != null)
                     {
                         renderer.material.color = teamColors[teamIndex];
                     }
 
-                    Debug.Log($"Utilisateur {team.User[i].id} positionné en {test.transform.position}");
+                    allUsersGameObject.Add(gameobjectUser);
+
+                    Debug.Log($"Utilisateur {team.User[i].id} positionné en {gameobjectUser.transform.position}");
                 }
             }
         }
@@ -114,7 +149,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
             Debug.Log("Création de 3 équipes.");
             numberOfTeams = 3;
         }
-        else if (sizeUser <= 20)
+        else if (sizeUser <= userMax)
         {
             Debug.Log("Création de 4 équipes.");
             numberOfTeams = 4;
@@ -138,6 +173,21 @@ public class AllUserDoubleJoystick : MonoBehaviour
         return true;
     }
 
+    public void ResetGame()
+    {
+        allUser.Clear();
+        allTeam.Clear();
+        users.Clear();
+        textAllUserConnected.text = "ALL USER CONNECTED :\r\n";
+        canvasMenu.enabled = true;
+
+        foreach (GameObject user in allUsersGameObject)
+        {
+            GameObject.Destroy(user);
+        }
+        allUsersGameObject.Clear();
+        GameObject.Destroy(map);
+    }
 }
 
 
