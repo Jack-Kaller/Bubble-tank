@@ -36,6 +36,13 @@ public class AllUserDoubleJoystick : MonoBehaviour
             {
                 allUser[i].joystickLeft = joystickLeft;
                 allUser[i].joystickRight = joystickRight;
+                PlayerGamepadRelayMono PGM = allUsersGameObject[i].GetComponentInChildren<PlayerGamepadRelayMono>();
+
+                if (PGM != null)
+                {
+                    PGM.PushInGamepadValue( userId ,joystickLeft, joystickRight);
+                }
+
                 onValueChanged.Invoke(allUser[i]);
                 return;
             }
@@ -158,14 +165,15 @@ public class AllUserDoubleJoystick : MonoBehaviour
     {
         int sizeUser = users.Count;
         allTeam = new List<Team>();
+        int numberOfTeams;
 
-        if (sizeUser < 4)
+        if (sizeUser < 0)
         {
-            Debug.LogError("Il n'y a pas assez de personnes pour créer une équipe.");
-            return false;
+            //Debug.LogError("Il n'y a pas assez de personnes pour créer une équipe.");
+            //return false;
+            numberOfTeams = 1;
         }
 
-        int numberOfTeams;
         if (sizeUser < 9)
         {
             Debug.Log("Création de 2 équipes.");

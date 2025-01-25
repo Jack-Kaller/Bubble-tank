@@ -34,7 +34,7 @@ public class QuickScript_II2GamepadOrAction : MonoBehaviour
             m_lastGamepad = gamepad;
             m_onGamepadReceived.Invoke(
                 received.index
-                , new Vector3(gamepad.m_joystickLeftHorizontal, gamepad.m_joystickRightVertical)
+                , new Vector3(gamepad.m_joystickLeftHorizontal, gamepad.m_joystickLeftVertical)
                 , new Vector3(gamepad.m_joystickRightHorizontal, gamepad.m_joystickRightVertical)
                 );
         }
