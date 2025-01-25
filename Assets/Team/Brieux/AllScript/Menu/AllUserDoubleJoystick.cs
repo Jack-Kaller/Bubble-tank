@@ -17,14 +17,19 @@ public class AllUserDoubleJoystick : MonoBehaviour
     public List<GameObject> allMap;
     public List<GameObject> allUsersGameObject;
 
+    [SerializeField]
+    private Timer theTimer;
+
     private GameObject map;
     private int userMax = 20;
+    private bool isGamePause = false;
 
 
 
     public void SetOrAdd(int userId , Vector2 joystickLeft, Vector2 joystickRight)
     {
-        
+        if (isGamePause) return;
+
         for (int i = 0; i < allUser.Count; i++)
         {
             if (allUser[i].id == userId)
@@ -53,6 +58,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
 
     public void PushIntegerAction(int userId, int action)
     {
+        if (isGamePause) return;
         for (int i = 0; i < allUser.Count; i++)
         {
             if (allUser[i].id == userId)
@@ -69,15 +75,16 @@ public class AllUserDoubleJoystick : MonoBehaviour
         if (CreateTeam())
         {
             map = Instantiate(allMap[allTeam.Count - 2]);
-
+            theTimer.isGameStarted = true;
 
             List<Vector3> teamPositions = new List<Vector3>();
             GameObject[] spawner = GameObject.FindGameObjectsWithTag("Spawn");
 
+            
 
             foreach (var spawn in spawner)
             {
-                teamPositions.Add(spawn.transform.position);
+                teamPositions.Add(spawn.transform.position + new Vector3(0,1,0));
             }
 
             Color[] teamColors = {
@@ -98,13 +105,16 @@ public class AllUserDoubleJoystick : MonoBehaviour
                     GameObject gameobjectUser = Instantiate(prefabUser);
                     gameobjectUser.name = $"Utilisateur_{team.User[i].id}";
 
-                    PlayerTeamIdRelayMono idOfPlayer = gameobjectUser.gameObject.GetComponent<PlayerTeamIdRelayMono>();
-                    PlayerColorRelayMono colorPlayer = gameobjectUser.GetComponent<PlayerColorRelayMono>();
-                    PlayerGamepadRelayMono gamepadPlayer = gameobjectUser.GetComponent<PlayerGamepadRelayMono>();
 
-                    idOfPlayer.SetTeamId(team.User[i].id);
-                    colorPlayer.SetColor(teamColors[teamIndex]);
-                    gamepadPlayer.PushInGamepadValue(team.User[i].id, Random.insideUnitCircle, Random.insideUnitCircle);
+                    PlayerTeamIdRelayMono idOfPlayer = gameobjectUser.gameObject.GetComponentInChildren<PlayerTeamIdRelayMono>();
+                    PlayerColorRelayMono colorPlayer = gameobjectUser.GetComponentInChildren<PlayerColorRelayMono>();
+                    PlayerGamepadRelayMono gamepadPlayer = gameobjectUser.GetComponentInChildren<PlayerGamepadRelayMono>();
+
+                    
+
+                    idOfPlayer?.SetTeamId(team.User[i].id);
+                    colorPlayer?.SetColor(teamColors[teamIndex]);
+                    gamepadPlayer?.PushInGamepadValue(team.User[i].id, Random.insideUnitCircle, Random.insideUnitCircle);
 
                     Vector3 offset = new Vector3(i * 1, 0, 0);
                     gameobjectUser.transform.position = teamPositions[teamIndex] + offset;
@@ -173,8 +183,15 @@ public class AllUserDoubleJoystick : MonoBehaviour
         return true;
     }
 
+    public void PauseGame()
+    {
+        Debug.Log("je met le jeu en pause.");
+        isGamePause= true;
+    }
+
     public void ResetGame()
     {
+        theTimer.isGameStarted = false;
         allUser.Clear();
         allTeam.Clear();
         users.Clear();
