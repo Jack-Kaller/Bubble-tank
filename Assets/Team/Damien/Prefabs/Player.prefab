@@ -502,6 +502,7 @@ GameObject:
   - component: {fileID: 3465555862736721757}
   - component: {fileID: 2563797075869784060}
   - component: {fileID: 3186903399721453866}
+  - component: {fileID: 4610301363467629352}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -645,5 +646,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_onActionEventWithIdReceived:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4610301363467629352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8716285581423193667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6afe3a5aeaabbfa42a804b65c01d2113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_teamId: 0
+  m_onTeamIdChanged:
     m_PersistentCalls:
       m_Calls: []
