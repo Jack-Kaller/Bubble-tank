@@ -381,6 +381,37 @@ Transform:
   - {fileID: 2741993643655982838}
   m_Father: {fileID: 1418984810158472275}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7652020742551234131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3150752160249210239}
+  m_Layer: 0
+  m_Name: BubbleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3150752160249210239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7652020742551234131}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.165, y: -0.042, z: 1.269}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1418984810158472275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8400947019804010193
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +534,8 @@ GameObject:
   - component: {fileID: 2563797075869784060}
   - component: {fileID: 3186903399721453866}
   - component: {fileID: 4610301363467629352}
+  - component: {fileID: 8496042968839165201}
+  - component: {fileID: 7179579496564081753}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -528,6 +561,7 @@ Transform:
   - {fileID: 9008044569144483876}
   - {fileID: 7954288703654025827}
   - {fileID: 2241103393549007310}
+  - {fileID: 3150752160249210239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &4295137789268633854
@@ -537,7 +571,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8716285581423193667}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e2b1bb07a69d9f218906a6e80376075f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -562,8 +596,8 @@ Rigidbody:
   m_GameObject: {fileID: 8716285581423193667}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.1
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -592,7 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c280af517e96a4e878d84154e41791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerColor: {r: 0.16812241, g: 1, b: 0, a: 0}
+  m_playerColor: {r: 1, g: 0, b: 0.13618708, a: 1}
   m_onColorChanged:
     m_PersistentCalls:
       m_Calls:
@@ -664,3 +698,33 @@ MonoBehaviour:
   m_onTeamIdChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8496042968839165201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8716285581423193667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4ac74c9605cb9109861e24e6f5e16b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubbleDeliverySpeed: 500
+  bubbleSpawner: {fileID: 7652020742551234131}
+  bubblePrefab: {fileID: 6072402089679426687, guid: b34a055255e514788911966872687b70, type: 3}
+  waitTimeBeforeShoot: 1
+  actionTriggered: 0
+--- !u!114 &7179579496564081753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8716285581423193667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f696c1487a2483f58cc75bbbb3715e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoints: 3

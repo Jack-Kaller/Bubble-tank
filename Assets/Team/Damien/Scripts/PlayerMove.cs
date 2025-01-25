@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerMove : MonoBehaviour
 {
     
+    [Header("Player stats")]
     [SerializeField] float moveForce = 2;
     [SerializeField] float rotationSpeed = 2;
     [SerializeField] Rigidbody rb;
