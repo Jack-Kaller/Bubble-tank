@@ -840,7 +840,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nbrUser: 20
+  nbrUser: 1
 --- !u!4 &488476577
 Transform:
   m_ObjectHideFlags: 0
@@ -1342,7 +1342,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TextMeshProUGUI: {fileID: 1213652120}
   factory: {fileID: 506371173}
+  textAllUserDead: {fileID: 0}
   isGameStarted: 0
+  activeUsers: []
+  userDb: {fileID: 0}
 --- !u!114 &1213652120
 MonoBehaviour:
   m_ObjectHideFlags: 0

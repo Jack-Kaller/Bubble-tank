@@ -22,9 +22,6 @@ public class PlayerDestructor : MonoBehaviour
             }
         }
 
-        if (otherCollider.gameObject.CompareTag("Player"))
-        {
-            otherCollider.gameObject.SetActive(false);
-        }
+        
     }
 }
