@@ -1,8 +1,12 @@
 {
   "dependencies": {
     "be.elab.gameincameraviewoverlayer": "https://github.com/EloiStree/2024_02_29_GameInCameraViewOverLayer.git",
+    "be.elab.iid": "https://github.com/EloiStree/OpenUPM_IID.git",
+    "be.elab.indexintcmd": "https://github.com/EloiStree/2024_02_21_IndexIntCmd.git",
+    "be.elab.intcmd": "https://github.com/EloiStree/2024_02_17_IntCmd.git",
     "be.elab.pushgenericintegerdate": "https://github.com/EloiStree/OpenUPM_PushGenericIID.git",
     "be.elab.tickcollection": "https://github.com/EloiStree/OpenUMP_TickCollection.git",
+    "be.elab.udpthreadsender": "https://github.com/EloiStree/2020_11_29_UDPThreadSender.git",
     "com.unity.ai.navigation": "2.0.5",
     "com.unity.collab-proxy": "2.6.0",
     "com.unity.ide.rider": "3.0.31",

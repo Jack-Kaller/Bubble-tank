@@ -7,6 +7,27 @@
       "dependencies": {},
       "hash": "1e6490fd2d7a91a2595a355fa3603f6adbc34952"
     },
+    "be.elab.iid": {
+      "version": "https://github.com/EloiStree/OpenUPM_IID.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1df7c05886c0946341802d73a8c06f0eed261d40"
+    },
+    "be.elab.indexintcmd": {
+      "version": "https://github.com/EloiStree/2024_02_21_IndexIntCmd.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "cfd9af4b1e4556d5b645a9eedbefb43df3b40817"
+    },
+    "be.elab.intcmd": {
+      "version": "https://github.com/EloiStree/2024_02_17_IntCmd.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "983afb3f825282af420a8b48f874437388219afc"
+    },
     "be.elab.pushgenericintegerdate": {
       "version": "https://github.com/EloiStree/OpenUPM_PushGenericIID.git",
       "depth": 0,
@@ -20,6 +41,13 @@
       "source": "git",
       "dependencies": {},
       "hash": "3f49848ede4c03cc9285109b5a9dc4370669980f"
+    },
+    "be.elab.udpthreadsender": {
+      "version": "https://github.com/EloiStree/2020_11_29_UDPThreadSender.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "59927904021fe46e83c856a72823e339da3aed05"
     },
     "com.unity.ai.navigation": {
       "version": "2.0.5",

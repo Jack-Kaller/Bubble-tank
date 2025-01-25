@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1631944790527311467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6767274083493336872}
+  - component: {fileID: 2082635880537405725}
+  m_Layer: 0
+  m_Name: Change Color
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6767274083493336872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631944790527311467}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8499774318063451726}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2082635880537405725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631944790527311467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35cd42cfc7c98c743b230cbd3eb004de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_renderers:
+  - {fileID: 4915845562320210745}
 --- !u!1 &2614885324727491288
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +136,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8499774318063451726}
+  - component: {fileID: 2252051012359201543}
+  - component: {fileID: 3378254845291979722}
+  - component: {fileID: 8933860804842446046}
+  - component: {fileID: 2477132437046293542}
   - component: {fileID: 675622251165353793}
   - component: {fileID: 4915845562320210745}
   - component: {fileID: 7780922081891964121}
@@ -115,8 +165,135 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5695452008617436718}
+  - {fileID: 6767274083493336872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2252051012359201543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237788633224251783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6afe3a5aeaabbfa42a804b65c01d2113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_teamId: 0
+  m_onTeamIdChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3378254845291979722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237788633224251783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c280af517e96a4e878d84154e41791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playerColor: {r: 1, g: 0, b: 0, a: 1}
+  m_onColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2082635880537405725}
+        m_TargetAssemblyTypeName: QuickScript_ChangeColorRenderers, Assembly-CSharp
+        m_MethodName: PushInColor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8933860804842446046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237788633224251783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a73f9bf76fc26428d3cec5791a686e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_userIntegerId: 0
+  m_joystickLeftPercent: {x: 0, y: 0, z: 0}
+  m_joystickRightPercent: {x: 0, y: 0, z: 0}
+  m_onGamepadReceived:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2477132437046293542}
+        m_TargetAssemblyTypeName: QuickScript_SplitDoubleJoystickToVector2, Assembly-CSharp
+        m_MethodName: PushIn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_onGamepadWithIdReceived:
+    m_PersistentCalls:
+      m_Calls: []
+  m_lastActionReceived: 0
+  m_onActionEventReceived:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onActionEventWithIdReceived:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2477132437046293542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7237788633224251783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e0c3ed67ae00d46ac88b3af8988ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onLeft:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3049991953682489449}
+        m_TargetAssemblyTypeName: QuickScript_MockMoveTransform, Assembly-CSharp
+        m_MethodName: SetJoystick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_onRight:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3915637535461297150}
+        m_TargetAssemblyTypeName: QuickScript_MockMoveRigidBody, Assembly-CSharp
+        m_MethodName: SetJoystick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!33 &675622251165353793
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -265,5 +442,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_whatToMove: {fileID: 8499774318063451726}
-  m_speed: 0
+  m_speed: 5
   m_joystickMove: {x: 0, y: 0}

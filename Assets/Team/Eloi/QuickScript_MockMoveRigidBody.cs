@@ -8,7 +8,7 @@ public class QuickScript_MockMoveRigidBody : MonoBehaviour
 
     public Vector2 m_joystickMove;
 
-    public void SetLeftJoystick(Vector2 joystick)
+    public void SetJoystick(Vector2 joystick)
     {
         m_joystickMove = joystick;
     }
