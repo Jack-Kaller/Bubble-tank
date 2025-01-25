@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using JetBrains.Annotations;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +11,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
     public List<UserIdToDoubleJoyStick> allUser;
     public List<Team> allTeam;
     public List<User> users;
+   
     public UnityEvent<UserIdToDoubleJoyStick> onValueChanged;
     public UnityEvent<UserIdToDoubleJoyStick> onNewUser;
     public GameObject prefabUser;
@@ -20,11 +23,32 @@ public class AllUserDoubleJoystick : MonoBehaviour
     [SerializeField]
     private Timer theTimer;
 
+    [SerializeField]
     private GameObject map;
     private int userMax = 30;
     private bool isGamePause = false;
+    private bool isGameStart = false;
 
 
+    public void DoAction(int action)
+    {
+        switch (action)
+        {
+            case 42:
+                LaunchGame();
+                break;
+            case 69:
+                Debug.Log("hello");
+                StartCoroutine(reset());
+                break;
+        }
+    }
+
+    IEnumerator reset()
+    {
+         yield return new WaitForSeconds(1);
+        ResetGame();
+    }
 
     public void SetOrAdd(int userId , Vector2 joystickLeft, Vector2 joystickRight)
     {
@@ -34,10 +58,21 @@ public class AllUserDoubleJoystick : MonoBehaviour
         {
             if (allUser[i].id == userId)
             {
-                allUser[i].joystickLeft = joystickLeft;
-                allUser[i].joystickRight = joystickRight;
-                onValueChanged.Invoke(allUser[i]);
+                if (i < allUsersGameObject.Count)
+                {
+                    allUser[i].joystickLeft = joystickLeft;
+                    allUser[i].joystickRight = joystickRight;
+                    PlayerGamepadRelayMono PGM = allUsersGameObject[i].GetComponentInChildren<PlayerGamepadRelayMono>();
+
+                    if (PGM != null)
+                    {
+                        PGM.PushInGamepadValue(userId, joystickLeft, joystickRight);
+                    }
+
+                    onValueChanged.Invoke(allUser[i]);
+                }
                 return;
+
             }
         }
 
@@ -58,16 +93,32 @@ public class AllUserDoubleJoystick : MonoBehaviour
 
     public void PushIntegerAction(int userId, int action)
     {
-        if (isGamePause) return;
+        if (isGamePause) return; 
+
         for (int i = 0; i < allUser.Count; i++)
         {
             if (allUser[i].id == userId)
             {
-                PlayerGamepadRelayMono gamepadUser = allUsersGameObject[i].GetComponent<PlayerGamepadRelayMono>();
-                gamepadUser.PushInIntegerAction(userId, action);
+                if(i < allUsersGameObject.Count)
+                {
+                    PlayerGamepadRelayMono gamepadUser = allUsersGameObject[i].GetComponent<PlayerGamepadRelayMono>();
+                    gamepadUser.PushInIntegerAction(userId, action);
+                    allUser[i].lastReceived = action;
+                }
                 return;
             }
         }
+
+        UserIdToDoubleJoyStick newUser = new UserIdToDoubleJoyStick { id = userId, joystickLeft = Vector2.zero , joystickRight = Vector2.zero };
+
+        allUser.Add(newUser);
+        onNewUser.Invoke(newUser);
+        onValueChanged.Invoke(newUser);
+        User tempUser = new User();
+        tempUser.id = userId;
+        users.Add(tempUser);
+        textAllUserConnected.text += $"user avec id : {userId}\r\n";
+
     }
 
     public void LaunchGame()
@@ -126,10 +177,10 @@ public class AllUserDoubleJoystick : MonoBehaviour
                     else
                     {
                         float angle = (360f / team.User.Count) * (i - 1); 
-                        float radius = 1f; 
+                        float radius = 3f; 
                         offset = new Vector3(
                             Mathf.Cos(angle * Mathf.Deg2Rad) * radius, 
-                            0.5f,
+                            1.5f,
                             Mathf.Sin(angle * Mathf.Deg2Rad) * radius  
                         );
                     }
@@ -158,14 +209,14 @@ public class AllUserDoubleJoystick : MonoBehaviour
     {
         int sizeUser = users.Count;
         allTeam = new List<Team>();
+        int numberOfTeams;
 
-        if (sizeUser < 4)
+        if (sizeUser < 2)
         {
             Debug.LogError("Il n'y a pas assez de personnes pour créer une équipe.");
             return false;
         }
 
-        int numberOfTeams;
         if (sizeUser < 9)
         {
             Debug.Log("Création de 2 équipes.");
@@ -213,20 +264,27 @@ public class AllUserDoubleJoystick : MonoBehaviour
 
     public void ResetGame()
     {
-        isGamePause= false;
+        GameObject.Destroy(map);
+        isGamePause = false;
         theTimer.isGameStarted = false;
+        foreach (GameObject user in allUsersGameObject)
+        {
+            user.SetActive(true);
+            GameObject.Destroy(user);
+        }
+        allUsersGameObject.Clear();
+
+        theTimer.isGood = true;
+
         allUser.Clear();
         allTeam.Clear();
         users.Clear();
         textAllUserConnected.text = "ALL USER CONNECTED :\r\n";
         canvasMenu.enabled = true;
 
-        foreach (GameObject user in allUsersGameObject)
-        {
-            GameObject.Destroy(user);
-        }
-        allUsersGameObject.Clear();
-        GameObject.Destroy(map);
+
+        Debug.Log("tout supp");
+
     }
 }
 

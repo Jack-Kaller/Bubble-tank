@@ -175,7 +175,7 @@ MonoBehaviour:
   moveForce: 0.1
   rotationSpeed: 200
   rb: {fileID: 3465555862736721757}
-  m_direction: {fileID: 0}
+  m_direction: {fileID: 3150752160249210239}
   leftJoystick: {x: 0, y: 0}
   rightJoystick: {x: 0, y: 0}
   mode: 1
@@ -613,7 +613,19 @@ MonoBehaviour:
   m_lastActionReceived: 0
   m_onActionEventReceived:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8496042968839165201}
+        m_TargetAssemblyTypeName: BubbleFiring, Assembly-CSharp
+        m_MethodName: OnAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_onActionEventWithIdReceived:
     m_PersistentCalls:
       m_Calls: []
@@ -650,6 +662,10 @@ MonoBehaviour:
   bubblePrefab: {fileID: 6072402089679426687, guid: b34a055255e514788911966872687b70, type: 3}
   waitTimeBeforeShoot: 0.2
   actionTriggered: 0
+  m_checkWallMaxDistance: 0.1
+  m_wallAndOtherLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &7179579496564081753
 MonoBehaviour:
   m_ObjectHideFlags: 0
