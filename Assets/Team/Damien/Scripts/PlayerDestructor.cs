@@ -7,6 +7,15 @@ public class PlayerDestructor : MonoBehaviour
     
     private void OnCollisionEnter(Collision bubble)
     {
+        
+        Rigidbody rbdy = gameObject.GetComponent<Rigidbody>();
+
+        //Stop Moving/Translating
+        rbdy.linearVelocity = Vector3.zero;
+
+        //Stop rotating
+        rbdy.angularVelocity = Vector3.zero;
+        
         if (bubble.gameObject.CompareTag("bubble"))
         {
             Destroy(bubble.gameObject);
