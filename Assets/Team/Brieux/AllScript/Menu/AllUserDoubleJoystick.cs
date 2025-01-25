@@ -9,6 +9,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
     public List<UserIdToDoubleJoyStick> allUser;
     public List<Team> allTeam;
     public List<User> users;
+   
     public UnityEvent<UserIdToDoubleJoyStick> onValueChanged;
     public UnityEvent<UserIdToDoubleJoyStick> onNewUser;
     public GameObject prefabUser;
@@ -70,11 +71,23 @@ public class AllUserDoubleJoystick : MonoBehaviour
         {
             if (allUser[i].id == userId)
             {
-                PlayerGamepadRelayMono gamepadUser = allUsersGameObject[i].GetComponent<PlayerGamepadRelayMono>();
+                PlayerGamepadRelayMono gamepadUser = allUsersGameObject[i].GetComponentInChildren<PlayerGamepadRelayMono>();
                 gamepadUser.PushInIntegerAction(userId, action);
+                allUser[i].lastReceived = action;
                 return;
             }
         }
+
+        UserIdToDoubleJoyStick newUser = new UserIdToDoubleJoyStick { id = userId, joystickLeft = Vector2.zero , joystickRight = Vector2.zero };
+
+        allUser.Add(newUser);
+        onNewUser.Invoke(newUser);
+        onValueChanged.Invoke(newUser);
+        User tempUser = new User();
+        tempUser.id = userId;
+        users.Add(tempUser);
+        textAllUserConnected.text += $"user avec id : {userId}\r\n";
+
     }
 
     public void LaunchGame()
