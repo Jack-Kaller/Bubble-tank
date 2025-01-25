@@ -39,7 +39,7 @@ public class RandomUser : MonoBehaviour
             foreach (var user in users)
             {
                 onRandomPush.Invoke(user.id, Random.insideUnitCircle, Random.insideUnitCircle);
-                yield return new WaitForSeconds(1); 
+                yield return new WaitForSeconds(0); 
             }
         }
     }
