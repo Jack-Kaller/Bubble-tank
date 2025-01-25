@@ -5,25 +5,26 @@ public class PlayerDestructor : MonoBehaviour
     
     [SerializeField] int lifePoints = 3;
     
-    private void OnCollisionEnter(Collision bubble)
+    private void OnCollisionEnter(Collision otherCollider)
     {
         
         Rigidbody rbdy = gameObject.GetComponent<Rigidbody>();
-
-        //Stop Moving/Translating
         rbdy.linearVelocity = Vector3.zero;
-
-        //Stop rotating
         rbdy.angularVelocity = Vector3.zero;
         
-        if (bubble.gameObject.CompareTag("bubble"))
+        if (otherCollider.gameObject.CompareTag("bubble"))
         {
-            Destroy(bubble.gameObject);
+            Destroy(otherCollider.gameObject);
             lifePoints--;
             if (lifePoints == 0)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
+        }
+
+        if (otherCollider.gameObject.CompareTag("Player"))
+        {
+            otherCollider.gameObject.SetActive(false);
         }
     }
 }
