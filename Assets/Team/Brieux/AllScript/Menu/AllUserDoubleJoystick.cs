@@ -64,7 +64,15 @@ public class AllUserDoubleJoystick : MonoBehaviour
                 {
                     GameObject test = Instantiate(prefabUser);
                     test.name = $"Utilisateur_{team.User[i].id}";
-                    
+
+                    PlayerTeamIdRelayMono idOfPlayer = test.gameObject.GetComponent<PlayerTeamIdRelayMono>();
+                    PlayerColorRelayMono colorPlayer = test.GetComponent<PlayerColorRelayMono>();
+                    PlayerGamepadRelayMono gamepadPlayer = test.GetComponent<PlayerGamepadRelayMono>();
+
+                    idOfPlayer.SetTeamId(team.User[i].id);
+                    colorPlayer.SetColor(teamColors[teamIndex]);
+                    gamepadPlayer.PushInGamepadValue(team.User[i].id, Random.insideUnitCircle, Random.insideUnitCircle);
+
                     Vector3 offset = new Vector3(i * 1, 0, 0);
                     test.transform.position = teamPositions[teamIndex] + offset;
 

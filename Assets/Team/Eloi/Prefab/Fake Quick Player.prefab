@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_whatToMove: {fileID: 876549659238317306}
-  m_moveForce: 2
+  m_moveForce: 0.1
   m_forceMode: 1
   m_joystickMove: {x: 0, y: 0}
 --- !u!1 &7237788633224251783
@@ -442,5 +442,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_whatToMove: {fileID: 8499774318063451726}
-  m_speed: 5
+  m_speed: 0.5
   m_joystickMove: {x: 0, y: 0}
