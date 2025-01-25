@@ -26,7 +26,7 @@ public class Timer : MonoBehaviour
 
             m_TextMeshProUGUI.text = $"{minute}:{formatted}";
 
-            if(minute >= 5)
+            if(minute >= 1)
             {
                 factory.PauseGame();
             }

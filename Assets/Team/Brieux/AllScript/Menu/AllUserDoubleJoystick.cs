@@ -191,6 +191,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
 
     public void ResetGame()
     {
+        isGamePause= false;
         theTimer.isGameStarted = false;
         allUser.Clear();
         allTeam.Clear();
