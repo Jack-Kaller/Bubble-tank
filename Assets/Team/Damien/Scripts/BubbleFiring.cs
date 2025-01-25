@@ -4,8 +4,8 @@ using UnityEngine.Assertions;
 public class BubbleFiring : MonoBehaviour
 {
 
-    [Header("Bubble stats")] 
-    [SerializeField] float speed = 2.0f;
+    [Header("Bubble stats")]
+    [SerializeField] private float bubbleDeliverySpeed = 10.0f;
     
     [SerializeField] GameObject bubbleSpawner;
     [SerializeField] GameObject bubblePrefab;
@@ -39,7 +39,7 @@ public class BubbleFiring : MonoBehaviour
             if (actionTriggered.ToString().StartsWith("13") )
             {
                 GameObject bubble = Instantiate(bubblePrefab, bubbleSpawner.transform.position, Quaternion.identity);
-                bubble.GetComponent<Rigidbody>().AddForce(bubbleSpawner.transform.forward * speed);
+                bubble.GetComponent<Rigidbody>().AddForce(bubbleSpawner.transform.forward * bubbleDeliverySpeed);
                 _timer = waitTimeBeforeShoot;
                 _isReloading = true;
             }

@@ -710,7 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4ac74c9605cb9109861e24e6f5e16b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  bubbleDeliverySpeed: 500
   bubbleSpawner: {fileID: 7652020742551234131}
   bubblePrefab: {fileID: 6072402089679426687, guid: b34a055255e514788911966872687b70, type: 3}
   waitTimeBeforeShoot: 1
