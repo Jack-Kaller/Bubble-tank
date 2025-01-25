@@ -9,11 +9,14 @@ public class RandomUser : MonoBehaviour
     public List<User> users = new List<User>();
     public UnityEvent<int, Vector2, Vector2> onRandomPush;
 
+    [SerializeField]
+    private int nbrUser = 10;
+
     void Start()
     {
         users = new List<User>();
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < nbrUser; i++)
         {
             User userTemps = new User();
             userTemps.id = Random.Range(-2_000_000, 2_000_000);

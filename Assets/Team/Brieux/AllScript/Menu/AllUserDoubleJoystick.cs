@@ -17,14 +17,19 @@ public class AllUserDoubleJoystick : MonoBehaviour
     public List<GameObject> allMap;
     public List<GameObject> allUsersGameObject;
 
+    [SerializeField]
+    private Timer theTimer;
+
     private GameObject map;
     private int userMax = 20;
+    private bool isGamePause = false;
 
 
 
     public void SetOrAdd(int userId , Vector2 joystickLeft, Vector2 joystickRight)
     {
-        
+        if (isGamePause) return;
+
         for (int i = 0; i < allUser.Count; i++)
         {
             if (allUser[i].id == userId)
@@ -53,6 +58,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
 
     public void PushIntegerAction(int userId, int action)
     {
+        if (isGamePause) return;
         for (int i = 0; i < allUser.Count; i++)
         {
             if (allUser[i].id == userId)
@@ -69,7 +75,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
         if (CreateTeam())
         {
             map = Instantiate(allMap[allTeam.Count - 2]);
-
+            theTimer.isGameStarted = true;
 
             List<Vector3> teamPositions = new List<Vector3>();
             GameObject[] spawner = GameObject.FindGameObjectsWithTag("Spawn");
@@ -173,8 +179,15 @@ public class AllUserDoubleJoystick : MonoBehaviour
         return true;
     }
 
+    public void PauseGame()
+    {
+        Debug.Log("je met le jeu en pause.");
+        isGamePause= true;
+    }
+
     public void ResetGame()
     {
+        theTimer.isGameStarted = false;
         allUser.Clear();
         allTeam.Clear();
         users.Clear();
