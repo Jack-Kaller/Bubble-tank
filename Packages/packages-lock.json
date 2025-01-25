@@ -1,5 +1,26 @@
 {
   "dependencies": {
+    "be.elab.gameincameraviewoverlayer": {
+      "version": "https://github.com/EloiStree/2024_02_29_GameInCameraViewOverLayer.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1e6490fd2d7a91a2595a355fa3603f6adbc34952"
+    },
+    "be.elab.pushgenericintegerdate": {
+      "version": "https://github.com/EloiStree/OpenUPM_PushGenericIID.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5b7d4ea86cf005192e791c073c770a7e2274eff8"
+    },
+    "be.elab.tickcollection": {
+      "version": "https://github.com/EloiStree/OpenUMP_TickCollection.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3f49848ede4c03cc9285109b5a9dc4370669980f"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.5",
       "depth": 0,
