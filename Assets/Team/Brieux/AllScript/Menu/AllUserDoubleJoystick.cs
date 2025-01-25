@@ -21,7 +21,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
     private Timer theTimer;
 
     private GameObject map;
-    private int userMax = 20;
+    private int userMax = 30;
     private bool isGamePause = false;
 
 
@@ -116,7 +116,24 @@ public class AllUserDoubleJoystick : MonoBehaviour
                     colorPlayer?.SetColor(teamColors[teamIndex]);
                     gamepadPlayer?.PushInGamepadValue(team.User[i].id, Random.insideUnitCircle, Random.insideUnitCircle);
 
-                    Vector3 offset = new Vector3(i * 1, 0, 0);
+                    //Vector3 offset = new Vector3(i * 1, 0, 0);
+
+                    Vector3 offset;
+                    if (i == 0)
+                    {
+                        offset = Vector3.zero;
+                    }
+                    else
+                    {
+                        float angle = (360f / team.User.Count) * (i - 1); 
+                        float radius = 1f; 
+                        offset = new Vector3(
+                            Mathf.Cos(angle * Mathf.Deg2Rad) * radius, 
+                            0.5f,
+                            Mathf.Sin(angle * Mathf.Deg2Rad) * radius  
+                        );
+                    }
+
                     gameobjectUser.transform.position = teamPositions[teamIndex] + offset;
 
                     Renderer renderer = gameobjectUser.GetComponent<Renderer>();
@@ -159,10 +176,15 @@ public class AllUserDoubleJoystick : MonoBehaviour
             Debug.Log("Création de 3 équipes.");
             numberOfTeams = 3;
         }
-        else if (sizeUser <= userMax)
+        else if (sizeUser < 20)
         {
             Debug.Log("Création de 4 équipes.");
             numberOfTeams = 4;
+        }
+        else if (sizeUser <= userMax)
+        {
+            Debug.Log("Création de 4 équipes.");
+            numberOfTeams = 5;
         }
         else
         {
