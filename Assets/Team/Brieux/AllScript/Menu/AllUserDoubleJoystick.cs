@@ -83,7 +83,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
 
             foreach (var spawn in spawner)
             {
-                teamPositions.Add(spawn.transform.position);
+                teamPositions.Add(spawn.transform.position + new Vector3(0,2,0));
             }
 
             Color[] teamColors = {
