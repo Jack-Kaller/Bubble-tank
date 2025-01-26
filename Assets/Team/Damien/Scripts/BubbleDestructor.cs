@@ -23,4 +23,12 @@ public class BubbleDestructor : MonoBehaviour
             _timer -= Time.deltaTime;    
         }
     }
+
+    private void OnCollisionEnter(Collision bubbleCollider)
+    {
+        if (bubbleCollider.gameObject.CompareTag("bubble"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
