@@ -6,13 +6,18 @@ public class PlayerMove : MonoBehaviour
     
     [Header("Player stats")]
     [SerializeField] float moveForce = 2;
-    [SerializeField] float rotationSpeed = 2;
-    [SerializeField] Rigidbody rb;
+    [SerializeField] float rotationSpeedAngle = 2;
+    [SerializeField] Rigidbody rigidbody;
 
     [SerializeField] private Transform m_direction;
     public Vector2 leftJoystick;
     public Vector2 rightJoystick;
     public ForceMode mode = ForceMode.Impulse;
+
+    public float m_transformMoveForwardSpeed = 1; 
+
+        public bool m_useRigid=false;
+    public bool m_useTransform = true;
     
     public void PushIn(Vector2 leftJoystick, Vector2 rightJoystick)
     {
@@ -28,24 +33,30 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        float horizontal = leftJoystick.x;
-        float vertical = leftJoystick.y;
+        if (m_useRigid) { 
+            float horizontal = leftJoystick.x;
+            float vertical = leftJoystick.y;
 
-        Vector3 direction = m_direction.forward;
-        direction.y = 0;
+            Vector3 direction = m_direction.forward;
+            direction.y = 0;
         
-        rb.AddForce(direction * (moveForce * vertical), mode);
+            rigidbody.AddForce(direction * (moveForce * vertical* Time.deltaTime), mode);
+        }
 
-        Vector3 directionRight = m_direction.right;
-        direction.y = 0;
-        
-        rb.AddForce(directionRight * (moveForce * horizontal), mode);
+        if (m_useTransform) {
+
+
+            Vector3 direction = m_direction.forward;
+            direction.y = 0;
+
+            rigidbody.transform.position += direction * (leftJoystick.y * Time.deltaTime* m_transformMoveForwardSpeed);
+        }
+
     }
 
     void Rotate()
     {
-        float horizontal = rightJoystick.x;
-        float vertical = rightJoystick.y;
-        rb.transform.Rotate(new Vector3(0, (horizontal + vertical) * Time.deltaTime * rotationSpeed, 0));
+        float horizontal = leftJoystick.x;
+        rigidbody.transform.Rotate(new Vector3(0, (horizontal ) * Time.deltaTime * rotationSpeedAngle, 0));
     }
 }
