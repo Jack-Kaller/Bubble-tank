@@ -29,6 +29,8 @@ public class AllUserDoubleJoystick : MonoBehaviour
     private bool isGamePause = false;
     private bool isGameStart = false;
 
+    public TextMeshProUGUI win;
+
 
     public void DoAction(int action)
     {
@@ -154,7 +156,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
                 for (int i = 0; i < team.User.Count; i++)
                 {
                     GameObject gameobjectUser = Instantiate(prefabUser);
-                    gameobjectUser.name = $"Utilisateur_{team.User[i].id}";
+                    gameobjectUser.name = $"{team.User[i].id}";
 
 
                     PlayerTeamIdRelayMono idOfPlayer = gameobjectUser.gameObject.GetComponentInChildren<PlayerTeamIdRelayMono>();
@@ -177,7 +179,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
                     else
                     {
                         float angle = (360f / team.User.Count) * (i - 1); 
-                        float radius = 3f; 
+                        float radius = 2f; 
                         offset = new Vector3(
                             Mathf.Cos(angle * Mathf.Deg2Rad) * radius, 
                             1.5f,
@@ -211,7 +213,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
         allTeam = new List<Team>();
         int numberOfTeams;
 
-        if (sizeUser < 2)
+        if (sizeUser < 1)
         {
             Debug.LogError("Il n'y a pas assez de personnes pour créer une équipe.");
             return false;
@@ -281,11 +283,11 @@ public class AllUserDoubleJoystick : MonoBehaviour
         users.Clear();
         textAllUserConnected.text = "ALL USER CONNECTED :\r\n";
         canvasMenu.enabled = true;
-
-
-        Debug.Log("tout supp");
+        win.text = "";
 
     }
+    
+
 }
 
 
