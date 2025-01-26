@@ -580,7 +580,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  nbrUser: 1
+  nbrUser: 66
 --- !u!4 &488476577
 Transform:
   m_ObjectHideFlags: 0
@@ -639,7 +639,7 @@ MonoBehaviour:
   canvasMenu: {fileID: 1647652820}
   allMap:
   - {fileID: 5025818252717646261, guid: de2a816c9c89bd946b8cfed6add1c9ee, type: 3}
-  - {fileID: 5528261345446363265, guid: 778f80903536a0e498a3132ffa1f5c6e, type: 3}
+  - {fileID: 5528261345446363265, guid: 635347a304c3fa343a2ec5a18ca8d3e3, type: 3}
   - {fileID: 1768145601555571765, guid: 1a5c4417078d09b4d9cf5ab62b230e9f, type: 3}
   - {fileID: 6845330905140920559, guid: 08f95c0f321875247ab402aaccba00b6, type: 3}
   allUsersGameObject: []
@@ -1968,7 +1968,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
