@@ -301,10 +301,6 @@ PrefabInstance:
       propertyPath: m_onActionEventReceived.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 5434567569596983844, guid: 26c5aca6c9b13c560a6b95858cb25f42, type: 3}
-      propertyPath: moveForce
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 8716285581423193667, guid: 26c5aca6c9b13c560a6b95858cb25f42, type: 3}
       propertyPath: m_Name
       value: Player

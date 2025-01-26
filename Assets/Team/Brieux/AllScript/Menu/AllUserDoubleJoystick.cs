@@ -25,7 +25,7 @@ public class AllUserDoubleJoystick : MonoBehaviour
 
     [SerializeField]
     private GameObject map;
-    private int userMax = 30;
+    private int userMax = 100;
     private bool isGamePause = false;
     private bool isGameStart = false;
 
