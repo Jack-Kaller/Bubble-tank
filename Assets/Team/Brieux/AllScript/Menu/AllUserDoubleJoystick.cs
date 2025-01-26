@@ -90,7 +90,8 @@ public class AllUserDoubleJoystick : MonoBehaviour
         User tempUser = new User();
         tempUser.id = userId;
         users.Add( tempUser);
-        textAllUserConnected.text += $"user avec id : {userId}\r\n"; 
+        //textAllUserConnected.text += $"user avec id : {userId}\r\n"; 
+        textAllUserConnected.text += " |";
     }
 
     public void PushIntegerAction(int userId, int action)
@@ -119,7 +120,8 @@ public class AllUserDoubleJoystick : MonoBehaviour
         User tempUser = new User();
         tempUser.id = userId;
         users.Add(tempUser);
-        textAllUserConnected.text += $"user avec id : {userId}\r\n";
+        //textAllUserConnected.text += $"user avec id : {userId}\r\n";
+        textAllUserConnected.text += " |";
 
     }
 
